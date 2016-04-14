@@ -27,6 +27,10 @@ if [ "$1" = 'kibana' ]; then
 		sed -ri "s!^(\#\s*)?(elasticsearch\.password:).*!\2 '$ELASTICSEARCH_PASSWORD'!" /opt/kibana/config/kibana.yml
 	fi
 
+    if [ "$KIBANA_BASEPATH" ]; then
+		sed -ri "s!^(\#\s*)?(server\.basePath:).*!\2 '$KIBANA_BASEPATH'!" /opt/kibana/config/kibana.yml
+	fi
+
 	set -- gosu kibana "$@"
 fi
 
